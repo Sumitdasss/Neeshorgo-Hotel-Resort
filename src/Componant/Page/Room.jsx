@@ -83,8 +83,8 @@ const toggleSizeDropdown3 = () => {
     const guestMatch =
       room.guests >= guests;
 
-    const priceMatch =
-      room.price * totalNights <= maxPrice;
+   const priceMatch =
+  room.price <= maxPrice;
 
     const serviceMatch =
       selectedServices.length === 0 ||
@@ -478,9 +478,13 @@ const toggleSizeDropdown3 = () => {
             TK {room.oldPrice} / PER NIGHT
           </p>
 
-          <p className="font-bold text-2xl text-black">
-            TK {room.price} / PER NIGHT
-          </p>
+         <p className="text-black font-bold text-2xl">
+  TK {room.price} / PER NIGHT
+</p>
+
+<p className="text-gray-500 text-sm mt-1">
+  TOTAL: TK {room.price * totalNights}
+</p>
         </div>
 
         {/* Button */}
