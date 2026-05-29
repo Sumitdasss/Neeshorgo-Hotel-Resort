@@ -109,15 +109,15 @@ const NavBAr = () => {
 
           {/* Mobile Menu Items */}
           <ul className="flex flex-col items-center gap-5 mt-6 uppercase tracking-wider overflow-y-auto max-h-[70vh] px-4">
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">Home</li>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">Rooms</li>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer font-bold">Amenities</li>
+            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/">Home</Link></li>
+            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/rooms">Rooms</Link></li>
+            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer font-bold"><Link to="/amenities">Amenities</Link></li>
             <li className="hover:text-[#5eead4] text-[15px] pl-4 duration-300 cursor-pointer text-white/80">Juice Bar</li>
             <li className="hover:text-[#5eead4] text-[15px] pl-4 duration-300 cursor-pointer text-white/80">Restaurant</li>
             <li className="hover:text-[#5eead4] text-[15px] pl-4 duration-300 cursor-pointer text-white/80">Facilities</li>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">About</li>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">Contact</li>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">Login</li>
+            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/about">About</Link></li>
+            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/contact">Contact</Link></li>
+            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/login">Login</Link></li>
           </ul>
         </div>
 
