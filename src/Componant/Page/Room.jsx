@@ -6,13 +6,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import {
   BedDouble,
   Users,
-  Waves,
-  Mountain,
-  Wifi,
-  Coffee,
-  ChevronDown, 
+ ChevronDown, 
 } from "lucide-react";
 import DateBox from "../Layout/Datebox";
+import { Link } from "react-router-dom";
 
 
 
@@ -64,10 +61,12 @@ const toggleSizeDropdown3 = () => {
   const services = [
     "Sea View",
     "Hill View",
+    "King Beds",
     "Breakfast",
     "Swimming Pool",
+    "Television",
     "Laundry",
-    "Beach Loungers",
+    "Beach Loungers"
   ];
 
   const totalNights =
@@ -147,7 +146,7 @@ const toggleSizeDropdown3 = () => {
 
   return (
     <section className="bg-[#f4f4f4] min-h-screen py-20 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
 
         {/* Top Filter */}
         <div className="bg-[#b6c8d9] px-8 py-5 flex justify-center gap-17 uppercase tracking-[2px] text-[12px] text-[#1f3550] mb-14">
@@ -225,12 +224,12 @@ const toggleSizeDropdown3 = () => {
             <div className="bg-[#b6c8d9] p-6 grid grid-cols-2 gap-5 mt-10">
 
               {/* Check In */}
-        <div className="bg-[#8eacc6] text-center py-5 w-full h-full border-none outline-none focus:outline-none focus:ring-0">
+        <div className="bg-[#8eacc6] text-center py-5 w-full  h-full border-none outline-none focus:outline-none focus:ring-0">
 
   
 
 
-  <DatePicker
+  <DatePicker 
   selected={checkIn}
   onChange={(date) => {
     setCheckIn(date);
@@ -249,11 +248,11 @@ const toggleSizeDropdown3 = () => {
 </div>
 
               {/* Check Out */}
-        <div className="bg-[#8eacc6] text-center py-5 w-full h-full border-none outline-none focus:outline-none focus:ring-0">
+        <div className="bg-[#8eacc6] text-center py-5  w-full h-full border-none outline-none focus:outline-none focus:ring-0">
 
   
 
-  <DatePicker
+  <DatePicker 
   selected={checkOut}
   onChange={(date) => setCheckOut(date)}
   minDate={
@@ -445,11 +444,13 @@ const toggleSizeDropdown3 = () => {
       {/* Content */}
       <div className="p-6">
 
-        <h2 className="text-[30px] leading-tight font-bold text-[#2b2b2b]">
-          {room.title}
-          <br />
-          ({room.view})
-        </h2>
+       <Link to={`/roomsdetails/${room.id}`}>
+         <h2 className="text-[30px] leading-tight font-bold text-[#2b2b2b]">
+           {room.title}
+           <br />
+           ({room.view})
+         </h2>
+       </Link>
 
         {/* Meta */}
         <div className="flex items-center gap-6 mt-5 text-gray-500 text-sm">
@@ -493,19 +494,55 @@ const toggleSizeDropdown3 = () => {
         </button>
 
         {/* Bottom Icons */}
-        <div className="flex justify-between items-center mt-8 border-t pt-5">
+       <div className="flex justify-between items-center mt-8 border-t pt-5">
 
-          <div className="flex gap-4 text-gray-500">
-            <Wifi size={18} />
-            <Coffee size={18} />
-            <Waves size={18} />
-            <Mountain size={18} />
-          </div>
+<div className="flex gap-4 text-gray-500">
+  {room.icon?.map((item, index) => (
 
-          <button className="uppercase tracking-[2px] text-[11px] text-[#c7a57a]">
-            Full Info →
-          </button>
-        </div>
+    <div
+      key={index}
+      className="relative group cursor-pointer"
+    >
+
+      <img
+        src={item.icon}
+        alt={item.title}
+        className="w-6 h-6 object-contain hover:scale-110 duration-300"
+      />
+
+      <span
+        className="
+          absolute
+          -top-10
+          left-1/2
+          -translate-x-1/2
+          whitespace-nowrap
+          bg-black
+          text-white
+          text-xs
+          px-3
+          py-1
+          rounded
+          opacity-0
+          invisible
+          group-hover:opacity-100
+          group-hover:visible
+          duration-300
+          z-50
+        "
+      >
+        {item.title}
+      </span>
+
+    </div>
+
+  ))}
+</div>
+  <button className="uppercase tracking-[2px] text-[11px] text-[#c7a57a]">
+    Full Info →
+  </button>
+
+</div>
       </div>
     </div>
   ))}

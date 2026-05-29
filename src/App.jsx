@@ -8,6 +8,7 @@ import NavBAr from './Componant/Layout/NavBAr'
 
 import Home from './Componant/Page/Home'
 import Room from './Componant/Page/Room'
+import RoomDetails from './Componant/Layout/RoomDitails'
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
 
 <Route index path="/" element={<Home/>}  ></Route>
 <Route path="/rooms" element={<Room/>}  ></Route>
+<Route path="/roomsdetails/:id" element={<RoomDetails/>}  ></Route>
 
 
 

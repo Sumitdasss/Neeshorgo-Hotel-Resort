@@ -10,7 +10,7 @@ const DateBox = forwardRef(
         type="button"
         onClick={onClick}
         ref={ref}
-        className="bg-[#8eacc6] text-center py-5 w-full h-full"
+        className="bg-[#8eacc6] text-center py-5 w-full h-full  cursor-pointer"
       >
         <p className="text-white text-[11px] tracking-[2px] mb-2">
           {label}
