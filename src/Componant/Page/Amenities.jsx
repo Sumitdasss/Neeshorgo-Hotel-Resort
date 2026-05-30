@@ -5,21 +5,23 @@ const Amenities = () => {
    <div className="w-full font-sans antialiased text-gray-800">
 
   <section className="max-w-[1440px] mx-auto px-4 py-16">
-    <h2 className="text-2xl md:text-3xl font-bold text-[#1A2B49] mb-12 text-center">
+    <h2 className="text-2xl md:text-3xl font-bold text-[#262626] mb-12 text-center">
       Our Services
     </h2>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
 
       {/* Service 1 */}
+      
+
       <div className="flex flex-col items-center">
         <div className="w-12 h-12 mb-4 flex items-center justify-center">
           <img src="https://neeshorgo.com.bd/wp-content/uploads/2017/07/icon-14-1.png"
             className="w-full h-full object-contain opacity-70" />
         </div>
-        <h3 className="text-xl font-bold text-[#1A2B49] mb-3">Swimming Pool</h3>
-        <p className="text-gray-500 text-sm leading-relaxed font-light">
-          It's hard to find a bad view in Neeshorgo...
+        <h3 className="text-3xl font-bold text-[#1A2B49] mb-3">Swimming Pool</h3>
+        <p className="text-gray-500 text-[18px] leading-relaxed font-light">
+         It's hard to find a bad view in Neeshorgo. But you can kick things up a notch with the roof top Infinity pool at the Neeshorgo Hotel & Resort. It overlooks the Mountain View on the East Side and Sea side view on the West.
         </p>
       </div>
 
@@ -29,9 +31,12 @@ const Amenities = () => {
           <img src="https://neeshorgo.com.bd/wp-content/uploads/2017/07/icon-17.png"
             className="w-full h-full object-contain opacity-70" />
         </div>
-        <h3 className="text-xl font-bold text-[#1A2B49] mb-3">24/7 Restaurant</h3>
-        <p className="text-gray-500 text-sm leading-relaxed font-light">
-          Nothing beats the smells wafting from a well-run kitchen...
+        <h3 className="text-3xl font-bold text-[#1A2B49] mb-3">24/7 Restaurant</h3>
+        <p className="text-gray-500 text-[18px] leading-relaxed font-light">
+         
+Nothing beats the smells wafting from a well-run kitchen – a pinch of rosemary here, some oregano there. An unique establishment that serves relatively fresh & tasty food at reasonable prices.
+
+
         </p>
       </div>
 
@@ -41,9 +46,9 @@ const Amenities = () => {
           <img src="https://neeshorgo.com.bd/wp-content/uploads/2017/07/icon-12-1.png"
             className="w-full h-full object-contain opacity-70" />
         </div>
-        <h3 className="text-xl font-bold text-[#1A2B49] mb-3">Wifi Areas</h3>
-        <p className="text-gray-500 text-sm leading-relaxed font-light">
-          High Speed Internet...
+        <h3 className="text-3xl font-bold text-[#1A2B49] mb-3">Wifi Areas</h3>
+        <p className="text-gray-500 text-[18px] leading-relaxed font-light">
+       High Speed Internet. While service and amenities play an important role, the availability of complimentary high speed hotel WiFi internet can make or break guest satisfaction.
         </p>
       </div>
 
@@ -53,9 +58,9 @@ const Amenities = () => {
           <img src="https://neeshorgo.com.bd/wp-content/uploads/2017/07/icon-18.png"
             className="w-full h-full object-contain opacity-70" />
         </div>
-        <h3 className="text-xl font-bold text-[#1A2B49] mb-3">TV</h3>
-        <p className="text-gray-500 text-sm leading-relaxed font-light">
-          Chilling out on the bed watching TV...
+        <h3 className="text-3xl font-bold text-[#1A2B49] mb-3">TV</h3>
+        <p className="text-gray-500 text-[18px] leading-relaxed font-light">
+         Chilling out on the bed in your hotel room watching television is sometimes the best part of a vacation. And we believe that good journalism, good television, can make our world a better place.
         </p>
       </div>
 
@@ -70,10 +75,10 @@ const Amenities = () => {
 
 <section
   className="relative w-full bg-cover bg-center bg-no-repeat py-20 md:py-28"
-  style={{ backgroundImage: "url('path-to-your/facilities-bg.jpg')" }}
+  style={{ backgroundImage: "url('https://images.pexels.com/photos/7732177/pexels-photo-7732177.jpeg')" }}
 >
 
-    <img src="" alt="" />
+   
   {/* Overlay */}
   <div className="absolute inset-0 bg-blue-900/20"></div>
 
