@@ -1,15 +1,17 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/purity */
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from 'swiper/react';
+  import { Autoplay, Pagination } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+
 import { Link,} from "react-router-dom";
 import { ALL_ROOMS } from "/src/Data/Data1.jsx";
 
 import {useRoomStore} from "/src/Data/store.js";
 
-const SlickSlider=Slider.default?Slider.default:Slider;
+
 import {
   Users,
   Square,
@@ -28,48 +30,6 @@ import DateBox from "./Datebox";
 
 const RoomDetails = () => {
 
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  pauseOnHover: false,
-  responsive: [
-    {
-      breakpoint: 1024, // ট্যাবলেট বা ছোট ল্যাপটপ
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-      }
-    },
-    {
-      breakpoint: 768, // ছোট ট্যাবলেট
-      settings: {
-        slidesToShow: 1, // এখানেও ১ করে দিন যাতে রিস্ক না থাকে
-        slidesToScroll: 1,
-      }
-    },
-    {
-      breakpoint: 640, // স্ট্যান্ডার্ড মোবাইল (Tailwind sm)
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerMode: false,
-      }
-    },
-    {
-      breakpoint: 480, // একদম ছোট মোবাইল স্ক্রিন
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerMode: false,
-      }
-    }
-  ]
-};
 
 
 
@@ -574,140 +534,129 @@ const maxGuests = bookingData?.guests || 1;
 {/* RELATED ROOMS */}
 
 <div className="mt-20">
-  <div className="text-center mb-10">
-    <h2 className="text-4xl font-bold text-[#0f2d4a] mb-3">
-      Related Rooms
-    </h2>
-    <p className="text-gray-500 text-lg">
-      Discover more luxury rooms
-    </p>
-  </div>
-
-  <div className="px-4 slider-container"> {/* কন্টেইনার গ্যাপ ঠিক রাখার জন্য */}
-  <SlickSlider {...settings}>
-    {ALL_ROOMS.filter(
-      (item) => item.id !== product.id
-    ).map((room, index) => (
-      
-      /* স্লাইডারের সরাসরি চাইল্ড ডিভে শুধু প্যাডিং থাকবে, কোনো উইডথ বা ফ্লেক্স ক্লাস দেওয়া যাবে না */
-      <div key={room.id} className="px-3 py-4 outline-none"> 
-
-        {/* আসল কার্ড: এখানে w-full ব্যবহার করতে হবে যাতে স্লাইডারের উইডথ অনুযায়ী কার্ড নিজেই অ্যাডজাস্ট হয় */}
-        <div
-          className="bg-white border border-gray-200 overflow-hidden rounded-md shadow-sm flex flex-col h-full w-full"
-          style={{
-            animationDelay: `${index * 0.15}s`,
-          }}
-        >
-          {/* Image */}
-          <div className="h-[250px] sm:h-[300px] overflow-hidden shrink-0">
-            <img
-              src={room.image}
-              alt={room.title}
-              className="w-full h-full object-cover hover:scale-105 duration-700"
-            />
-          </div>
-
-          {/* Content */}
-          <div className="p-6 flex flex-col flex-grow">
-            <Link 
-              to={`/roomsdetails/${room.id}`} 
-              onClick={() => setSelectedRoom(room)} 
-              className="hover:text-[#0f2d4a] transition-colors duration-300 block mb-2"
-            >
-              {/* টাইটেল ফিক্স: whitespace-normal এবং break-words লেখা নিচে নামাবে, আর min-h সব কার্ডের হাইট সমান রাখবে */}
-              <h2 className="text-[20px] sm:text-[24px] leading-tight font-bold text-[#2b2b2b] break-words whitespace-normal min-h-[64px]">
-                {room.title}
-                <span className="text-sm font-normal text-gray-500 block mt-1">({room.view})</span>
-              </h2>
-            </Link>
-
-            {/* Meta */}
-            <div className="flex items-center gap-6 mt-3 text-gray-500 text-sm">
-              <div className="flex items-center gap-2">
-                <Users size={16} />
-                <span>{room.guests} Guests</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <BedDouble size={16} />
-                <span>{room.size} Ft²</span>
-              </div>
-            </div>
-
-            {/* Desc - line clamp ব্যবহার করা হয়েছে যাতে ডেসক্রিপশন ৩ লাইনের বেশি না বড় হয় */}
-            <p className="text-gray-600 leading-relaxed text-[14px] mt-4 line-clamp-3 flex-grow">
-              The Standard Guest Suite includes 32" LED Flat Screen TV’s, Free high speed wireless internet access.
-            </p>
-
-            {/* Price */}
-            <div className="mt-6 pt-4 border-t border-gray-100 text-right">
-              {room.oldPrice && (
-                <p className="text-red-400 line-through text-xs">
-                  TK {room.oldPrice} / PER NIGHT
-                </p>
-              )}
-              <p className="text-[#0f2d4a] font-bold text-xl sm:text-2xl">
-                TK {room.price} / PER NIGHT
-              </p>
-              <p className="text-gray-400 text-xs mt-1">
-                TOTAL: TK {room.price * (totalNights || 1)}
-              </p>
-            </div>
-
-            {/* Button */}
-            <Link 
-              to="/booking" 
-              onClick={() => {
-                setSelectedRoom(room);
-                setBookingData({
-                  room: room,
-                  checkIn: checkIn,
-                  checkOut: checkOut,
-                  guests: guestCount,
-                  totalNights: totalNights,
-                  totalPrice: room.price * totalNights,
-                });
-              }} 
-            > 
-              <button className="mt-5 w-full border border-[#c7a57a] py-3.5 uppercase tracking-[2px] text-[11px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 font-semibold rounded-sm">
-                Book Now
-              </button>
-            </Link>
-
-            {/* Bottom Icons */}
-            <div className="flex justify-between items-center mt-6 border-t pt-4">
-              <div className="flex gap-3 text-gray-500">
-                {room.icon?.map((item, iconIdx) => (
-                  <div key={iconIdx} className="relative group cursor-pointer">
-                    <img
-                      src={item.icon}
-                      alt={item.title}
-                      className="w-5 h-5 object-contain hover:scale-110 duration-300"
-                    />
-                    <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black text-white text-xs px-2 py-1 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-50">
-                      {item.title}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              
-              <Link 
-                to={`/roomsdetails/${room.id}`} 
-                onClick={() => setSelectedRoom(room)} 
-                className="uppercase tracking-[1px] text-[11px] text-[#c7a57a] hover:underline font-medium"
-              >
-                Full Info →
-              </Link>
-            </div>
-          </div>
+        <div className="text-center mb-10">
+          <h2 className="text-4xl font-bold text-[#0f2d4a] mb-3">Related Rooms</h2>
+          <p className="text-gray-500 text-lg">Discover more luxury rooms</p>
         </div>
 
-      </div>
-    ))}
-  </SlickSlider>
-</div>
-</div>
+        <div className="px-2">
+          {ALL_ROOMS && ALL_ROOMS.length > 0 ? (
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              spaceBetween={20}
+              slidesPerView={1} // ডিফল্ট মোবাইলে ১টি
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              breakpoints={{
+                // রেসপনসিভ ব্রেকপয়েন্ট
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+              className="pb-12" // ডট গুলোর জন্য নিচে জায়গা রাখা
+            >
+              {ALL_ROOMS.filter((item) => item.id !== product.id).map((room, index) => (
+                <SwiperSlide key={room.id}>
+                  <div className="bg-white border border-gray-200 overflow-hidden rounded-md shadow-sm flex flex-col h-full mb-2">
+                    {/* Image */}
+                    <div className="h-[250px] sm:h-[300px] overflow-hidden shrink-0">
+                      <img
+                        src={room.image}
+                        alt={room.title}
+                        className="w-full h-full object-cover hover:scale-105 duration-700"
+                      />
+                    </div>
 
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <Link
+                        to={`/roomsdetails/${room.id}`}
+                        onClick={() => setSelectedRoom(room)}
+                        className="hover:text-[#0f2d4a] transition-colors duration-300 block mb-2"
+                      >
+                        <h2 className="text-[20px] sm:text-[24px] leading-tight font-bold text-[#2b2b2b] break-words whitespace-normal min-h-[64px]">
+                          {room.title}
+                          <span className="text-sm font-normal text-gray-500 block mt-1">({room.view})</span>
+                        </h2>
+                      </Link>
+
+                      {/* Meta */}
+                      <div className="flex items-center gap-6 mt-3 text-gray-500 text-sm">
+                        <div className="flex items-center gap-2">
+                          <Users size={16} />
+                          <span>{room.guests} Guests</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <BedDouble size={16} />
+                          <span>{room.size} Ft²</span>
+                        </div>
+                      </div>
+
+                      {/* Desc */}
+                      <p className="text-gray-600 leading-relaxed text-[14px] mt-4 line-clamp-3 flex-grow">
+                        The Standard Guest Suite includes 32" LED Flat Screen TV’s, Free high speed wireless internet access.
+                      </p>
+
+                      {/* Price */}
+                      <div className="mt-6 pt-4 border-t border-gray-100 text-right">
+                        {room.oldPrice && (
+                          <p className="text-red-400 line-through text-xs">TK {room.oldPrice} / PER NIGHT</p>
+                        )}
+                        <p className="text-[#0f2d4a] font-bold text-xl sm:text-2xl">
+                          TK {room.price} / PER NIGHT
+                        </p>
+                        <p className="text-gray-400 text-xs mt-1">
+                          TOTAL: TK {room.price * (totalNights || 1)}
+                        </p>
+                      </div>
+
+                      {/* Button */}
+                      <Link
+                        to="/booking"
+                        onClick={() => {
+                          setSelectedRoom(room);
+                          setBookingData({
+                            room: room,
+                            checkIn,
+                            checkOut,
+                            guests: guestCount,
+                            totalNights,
+                            totalPrice: room.price * totalNights,
+                          });
+                        }}
+                      >
+                        <button className="mt-5 w-full border border-[#c7a57a] py-3.5 uppercase tracking-[2px] text-[11px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 font-semibold rounded-sm">
+                          Book Now
+                        </button>
+                      </Link>
+
+                      {/* Bottom Icons */}
+                      <div className="flex justify-between items-center mt-6 border-t pt-4">
+                        <div className="flex gap-3 text-gray-500">
+                          {room.icon?.map((item, iconIdx) => (
+                            <div key={iconIdx} className="relative group cursor-pointer">
+                              <img src={item.icon} alt={item.title} className="w-5 h-5 object-contain" />
+                            </div>
+                          ))}
+                        </div>
+                        <Link
+                          to={`/roomsdetails/${room.id}`}
+                          onClick={() => setSelectedRoom(room)}
+                          className="uppercase tracking-[1px] text-[11px] text-[#c7a57a] hover:underline"
+                        >
+                          Full Info →
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <p className="text-center">Loading Rooms...</p>
+          )}
+        </div>
+      </div>
 
 
 
