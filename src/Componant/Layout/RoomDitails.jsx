@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/purity */
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { Link,} from "react-router-dom";
 import { ALL_ROOMS } from "/src/Data/Data1.jsx";
 import Slider from "react-slick";
 import {useRoomStore} from "/src/Data/store.js";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 const SlickSlider=Slider.default?Slider.default:Slider;
 import {
   Users,
