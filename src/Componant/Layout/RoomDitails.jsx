@@ -28,23 +28,27 @@ const RoomDetails = () => {
 
 const settings = {
   dots: true,
-  infinite: ALL_ROOMS.length > 3, // যদি ৩টির বেশি রুম থাকে তবেই লুপ হবে
-  speed: 700,
-  slidesToShow: 3,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3, // পিসিতে ৩টি
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
-  cssEase: "linear", // মসৃণ মুভমেন্টের জন্য
   responsive: [
     {
       breakpoint: 1024,
-      settings: { slidesToShow: 2 },
+      settings: {
+        slidesToShow: 2, // ট্যাবলেটে ২টি
+      }
     },
     {
-      breakpoint: 768,
-      settings: { slidesToShow: 1 },
-    },
-  ],
+      breakpoint: 640,
+      settings: {
+        slidesToShow: 1, // মোবাইলে ১টি (এতে কার্ড চ্যাপ্টা হবে না)
+        centerMode: true, // দুই পাশে সামান্য জায়গা রাখার জন্য
+        centerPadding: '20px',
+      }
+    }
+  ]
 };
 
 
