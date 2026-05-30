@@ -644,21 +644,24 @@ const maxGuests = bookingData?.guests || 1;
             </div>
 
             {/* Button */}
-           <Link to="/booking" onClick={() => {
-    setSelectedRoom(room);
+        <Link 
+  to="/booking" 
+  onClick={() => {
+    setSelectedRoom(room); // রুম সেট করা হচ্ছে
 
     setBookingData({
-      room,
-      checkIn,
-      checkOut,
-      guests,
-      totalNights,
-      totalPrice:
-        room.price * totalNights,
+      room: room,
+      checkIn: checkIn,
+      checkOut: checkOut,
+      guests: guestCount, // এখানে guestCount হবে, শুধু guests নয়
+      totalNights: totalNights,
+      totalPrice: room.price * totalNights,
     });
-  }} > <button className="mt-6 w-full border border-[#c7a57a] py-4 uppercase tracking-[3px] text-[12px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 rounded-sm">
-              Book Now
-            </button>
+  }} 
+> 
+  <button className="mt-6 w-full border border-[#c7a57a] py-4 uppercase tracking-[3px] text-[12px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 rounded-sm">
+    Book Now
+  </button>
 </Link>
             {/* Bottom Icons */}
             <div className="flex justify-between items-center mt-8 border-t pt-5">
