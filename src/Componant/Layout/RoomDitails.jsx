@@ -601,7 +601,7 @@ const maxGuests = bookingData?.guests || 1;
           <div className="p-6">
 
             <Link to={`/roomsdetails/${room.id}`} onClick={() => setSelectedRoom(room)} className="hover:text-[#0f2d4a] transition-colors duration-300">
-              <h2 className="text-[26px] leading-tight font-bold text-[#2b2b2b] min-h-[64px]">
+              <h2 className="text-[26px] leading-tight font-bold text-[#2b2b2b] ">
                 {room.title}
                 <br />
                 <span className="text-lg font-normal text-gray-500">({room.view})</span>
