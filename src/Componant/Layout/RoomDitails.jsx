@@ -32,27 +32,27 @@ const settings = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 3, // পিসিতে ৩টি
-  slidesToScroll: 1,
+  slidesToShow: 3,
+  slidesToScroll: 1, // এটি ১ রাখুন
   autoplay: true,
   responsive: [
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 2, // ট্যাবলেটে ২টি
+        slidesToShow: 2,
+        slidesToScroll: 1,
       }
     },
     {
-      breakpoint: 640,
+      breakpoint: 768, // এখানে ৬৪০ এর বদলে ৭৬৮ দিলে ভালো হয়
       settings: {
-        slidesToShow: 1, // মোবাইলে ১টি (এতে কার্ড চ্যাপ্টা হবে না)
-        centerMode: true, // দুই পাশে সামান্য জায়গা রাখার জন্য
-        centerPadding: '20px',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: false, // সেন্টার মোড ফলস করে দিন যাতে কার্ড চ্যাপ্টা না হয়
       }
     }
   ]
 };
-
 
 
 
