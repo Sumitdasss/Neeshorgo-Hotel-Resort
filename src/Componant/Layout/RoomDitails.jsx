@@ -560,82 +560,129 @@ const maxGuests = bookingData?.guests || 1;
     </p>
   </div>
 
-  <div className="px-4"> 
-   <SlickSlider {...settings}>
-  {ALL_ROOMS.filter((item) => item.id !== product.id).map((room, index) => (
-    <div key={room.id} className="px-2 py-4"> 
-      <div className="bg-white border border-gray-200 overflow-hidden rounded-md shadow-sm flex flex-col h-full min-w-[280px]">
-        
-        {/* Image Section */}
-        <div className="h-[280px] overflow-hidden shrink-0">
-          <img
-            src={room.image}
-            alt={room.title}
-            className="w-full h-full object-cover hover:scale-105 duration-700"
-          />
-        </div>
+  <div className="px-4 slider-container"> {/* কন্টেইনার গ্যাপ ঠিক রাখার জন্য */}
+  <SlickSlider {...settings}>
+    {ALL_ROOMS.filter(
+      (item) => item.id !== product.id
+    ).map((room, index) => (
+      
+      /* স্লাইডারের সরাসরি চাইল্ড ডিভে শুধু প্যাডিং থাকবে, কোনো উইডথ বা ফ্লেক্স ক্লাস দেওয়া যাবে না */
+      <div key={room.id} className="px-3 py-4 outline-none"> 
 
-        {/* Content Section */}
-        <div className="p-5 flex flex-col flex-grow">
-          <Link 
-            to={`/roomsdetails/${room.id}`} 
-            onClick={() => setSelectedRoom(room)} 
-            className="hover:text-[#0f2d4a] transition-colors duration-300 block mb-2"
-          >
-            {/* টাইটেল ফিক্স: whitespace-normal ব্যবহার করা হয়েছে যাতে লেখা না কাটে */}
-            <h2 className="text-[20px] sm:text-[22px] leading-tight font-bold text-[#2b2b2b] whitespace-normal break-words min-h-[60px]">
-              {room.title}
-              <span className="text-sm font-normal text-gray-500 block">({room.view})</span>
-            </h2>
-          </Link>
-
-          {/* Meta Info */}
-          <div className="flex items-center gap-4 mt-2 text-gray-500 text-xs">
-            <div className="flex items-center gap-1">
-              <Users size={14} /> {room.guests} Guests
-            </div>
-            <div className="flex items-center gap-1">
-              <Square size={14} /> {room.size} Ft²
-            </div>
+        {/* আসল কার্ড: এখানে w-full ব্যবহার করতে হবে যাতে স্লাইডারের উইডথ অনুযায়ী কার্ড নিজেই অ্যাডজাস্ট হয় */}
+        <div
+          className="bg-white border border-gray-200 overflow-hidden rounded-md shadow-sm flex flex-col h-full w-full"
+          style={{
+            animationDelay: `${index * 0.15}s`,
+          }}
+        >
+          {/* Image */}
+          <div className="h-[250px] sm:h-[300px] overflow-hidden shrink-0">
+            <img
+              src={room.image}
+              alt={room.title}
+              className="w-full h-full object-cover hover:scale-105 duration-700"
+            />
           </div>
 
-          {/* Price Section */}
-          <div className="mt-auto pt-6 text-right">
-            {room.oldPrice && (
-              <p className="text-red-400 line-through text-[12px]">
-                TK {room.oldPrice} / PER NIGHT
-              </p>
-            )}
-            <p className="text-[#0f2d4a] font-bold text-xl">
-              TK {room.price} / PER NIGHT
+          {/* Content */}
+          <div className="p-6 flex flex-col flex-grow">
+            <Link 
+              to={`/roomsdetails/${room.id}`} 
+              onClick={() => setSelectedRoom(room)} 
+              className="hover:text-[#0f2d4a] transition-colors duration-300 block mb-2"
+            >
+              {/* টাইটেল ফিক্স: whitespace-normal এবং break-words লেখা নিচে নামাবে, আর min-h সব কার্ডের হাইট সমান রাখবে */}
+              <h2 className="text-[20px] sm:text-[24px] leading-tight font-bold text-[#2b2b2b] break-words whitespace-normal min-h-[64px]">
+                {room.title}
+                <span className="text-sm font-normal text-gray-500 block mt-1">({room.view})</span>
+              </h2>
+            </Link>
+
+            {/* Meta */}
+            <div className="flex items-center gap-6 mt-3 text-gray-500 text-sm">
+              <div className="flex items-center gap-2">
+                <Users size={16} />
+                <span>{room.guests} Guests</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <BedDouble size={16} />
+                <span>{room.size} Ft²</span>
+              </div>
+            </div>
+
+            {/* Desc - line clamp ব্যবহার করা হয়েছে যাতে ডেসক্রিপশন ৩ লাইনের বেশি না বড় হয় */}
+            <p className="text-gray-600 leading-relaxed text-[14px] mt-4 line-clamp-3 flex-grow">
+              The Standard Guest Suite includes 32" LED Flat Screen TV’s, Free high speed wireless internet access.
             </p>
-          </div>
 
-          {/* Book Now Button - Vercel Fix */}
-          <Link 
-            to="/booking" 
-            onClick={() => {
-              setSelectedRoom(room);
-              setBookingData({
-                room: room,
-                checkIn: checkIn,
-                checkOut: checkOut,
-                guests: guestCount, // নিশ্চিত হোন এখানে guestCount আছে
-                totalNights: totalNights,
-                totalPrice: room.price * totalNights,
-              });
-            }} 
-          > 
-            <button className="mt-4 w-full border border-[#c7a57a] py-3 uppercase tracking-widest text-[11px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 rounded-sm font-semibold">
-              Book Now
-            </button>
-          </Link>
+            {/* Price */}
+            <div className="mt-6 pt-4 border-t border-gray-100 text-right">
+              {room.oldPrice && (
+                <p className="text-red-400 line-through text-xs">
+                  TK {room.oldPrice} / PER NIGHT
+                </p>
+              )}
+              <p className="text-[#0f2d4a] font-bold text-xl sm:text-2xl">
+                TK {room.price} / PER NIGHT
+              </p>
+              <p className="text-gray-400 text-xs mt-1">
+                TOTAL: TK {room.price * (totalNights || 1)}
+              </p>
+            </div>
+
+            {/* Button */}
+            <Link 
+              to="/booking" 
+              onClick={() => {
+                setSelectedRoom(room);
+                setBookingData({
+                  room: room,
+                  checkIn: checkIn,
+                  checkOut: checkOut,
+                  guests: guestCount,
+                  totalNights: totalNights,
+                  totalPrice: room.price * totalNights,
+                });
+              }} 
+            > 
+              <button className="mt-5 w-full border border-[#c7a57a] py-3.5 uppercase tracking-[2px] text-[11px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 font-semibold rounded-sm">
+                Book Now
+              </button>
+            </Link>
+
+            {/* Bottom Icons */}
+            <div className="flex justify-between items-center mt-6 border-t pt-4">
+              <div className="flex gap-3 text-gray-500">
+                {room.icon?.map((item, iconIdx) => (
+                  <div key={iconIdx} className="relative group cursor-pointer">
+                    <img
+                      src={item.icon}
+                      alt={item.title}
+                      className="w-5 h-5 object-contain hover:scale-110 duration-300"
+                    />
+                    <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black text-white text-xs px-2 py-1 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-50">
+                      {item.title}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              
+              <Link 
+                to={`/roomsdetails/${room.id}`} 
+                onClick={() => setSelectedRoom(room)} 
+                className="uppercase tracking-[1px] text-[11px] text-[#c7a57a] hover:underline font-medium"
+              >
+                Full Info →
+              </Link>
+            </div>
+          </div>
         </div>
+
       </div>
-    </div>
-  ))}
-</SlickSlider>
-  </div>
+    ))}
+  </SlickSlider>
+</div>
 </div>
 
 
