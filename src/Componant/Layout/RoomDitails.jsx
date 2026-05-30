@@ -36,21 +36,36 @@ const settings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
+  pauseOnHover: false,
   responsive: [
     {
-      breakpoint: 1024,
+      breakpoint: 1024, // ট্যাবলেট বা ছোট ল্যাপটপ
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
       }
     },
     {
-      breakpoint: 768, // ট্যাব এবং মোবাইলের জন্য
+      breakpoint: 768, // ছোট ট্যাবলেট
+      settings: {
+        slidesToShow: 1, // এখানেও ১ করে দিন যাতে রিস্ক না থাকে
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 640, // স্ট্যান্ডার্ড মোবাইল (Tailwind sm)
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
         centerMode: false,
-        arrows: false // মোবাইলে অ্যারো অফ রাখলে ডিজাইন ক্লিন থাকে
+      }
+    },
+    {
+      breakpoint: 480, // একদম ছোট মোবাইল স্ক্রিন
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: false,
       }
     }
   ]
