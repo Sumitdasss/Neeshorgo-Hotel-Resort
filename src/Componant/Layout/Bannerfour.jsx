@@ -48,7 +48,7 @@ const Bannerfour = () => {
       {/* Bottom Left Image */}
       <div className="overflow-hidden order-4 lg:order-3">
         <img
-          src="https://images.pexels.com/photos/29244071/pexels-photo-29244071.jpeg"
+          src="https://neeshorgo.com.bd/wp-content/uploads/2020/11/IMG_020008.jpg"
           alt="bbq"
           className="w-full h-full object-cover"
         />

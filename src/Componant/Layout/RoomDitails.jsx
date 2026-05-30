@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/purity */
-import { Link, useParams } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import { ALL_ROOMS } from "/src/Data/Data1.jsx";
 import Slider from "react-slick";
-
+import {useRoomStore} from "/src/Data/store.js";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const SlickSlider=Slider.default?Slider.default:Slider;
@@ -20,7 +20,7 @@ import {
   Umbrella,
 } from "lucide-react";
 
-import { useMemo, useState } from "react";
+import {  useState } from "react";
 import DatePicker from "react-datepicker";
 import DateBox from "./Datebox";
 
@@ -111,7 +111,7 @@ const generateWeeklyData = () => {
 
 const [showPriceList, setShowPriceList] = useState(false);
   const priceData = generateWeeklyData();
-
+const [guestCount, setGuestCount] = useState(1);
 
 
 
@@ -121,13 +121,12 @@ const [showPriceList, setShowPriceList] = useState(false);
     // eslint-disable-next-line react-hooks/purity
     new Date(Date.now() + 86400000)
   );
-  const { id } = useParams();
+  
 
 
 
  
 
-  const [guests] = useState(1);
 
   const totalNights =
     Math.ceil(
@@ -135,14 +134,20 @@ const [showPriceList, setShowPriceList] = useState(false);
         (1000 * 60 * 60 * 24)
     ) || 1;
 
-  const allProducts = useMemo(
-    () => [...ALL_ROOMS],
-    []
-  );
+    
+  const selectedRoom = useRoomStore(
+  (state) => state.selectedRoom
+);
+const {setSelectedRoom,setBookingData} = useRoomStore();
+const product =selectedRoom || allProducts.find( (item) => Number(item.id) === Number(id));
 
-  const product = allProducts.find(
-    (item) => Number(item.id) === Number(id)
-  );
+
+const bookingData = useRoomStore(
+  (state) => state.bookingData
+);
+
+const maxGuests = bookingData?.guests || 1;
+
 
   if (!product) {
     return (
@@ -152,6 +157,7 @@ const [showPriceList, setShowPriceList] = useState(false);
     );
   }
 
+  
   return (
     <div className="max-w-[1440px] mx-auto px-4 py-8 font-sans text-[#333333]">
 
@@ -479,14 +485,36 @@ const [showPriceList, setShowPriceList] = useState(false);
              </div>
 
               {/* GUEST */}
-              <div className="bg-[#7fa1c3] text-white p-4 h-28 rounded-md flex flex-col justify-between">
-                <span className="text-xs uppercase">
-                  {product.guests} Guests
-                </span>
+             <div className="bg-[#8eacc6] text-center py-5">
+                <p className="text-white text-[11px] tracking-[2px] mb-2">
+                  GUESTS
+                </p>
 
-                <span className="text-4xl font-bold">
-                  {product.guests}
-                </span>
+                <div className="flex justify-center items-center gap-4">
+                  <span className="text-[#083b67] text-5xl font-bold">
+                    {guestCount}
+                  </span>
+
+                  <div className="flex flex-col text-white">
+                    <button
+                      onClick={() =>
+                        setGuestCount((prev) => Math.min(maxGuests, prev + 1))
+                      }
+                    >
+                      ▲
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        setGuestCount((prev) =>
+                          Math.max(1, prev - 1)
+                        )
+                      }
+                    >
+                      ▼
+                    </button>
+                  </div>
+                </div>
               </div>
 
               {/* NIGHTS */}
@@ -502,10 +530,21 @@ const [showPriceList, setShowPriceList] = useState(false);
 
             </div>
 
-            <button className="w-full bg-[#004274] hover:bg-[#00335c] text-white font-bold py-3 rounded-md uppercase tracking-widest text-xs duration-300">
+           <Link to="/booking"   onClick={() => {
+   setSelectedRoom(product);
+
+    setBookingData({
+      room: product,
+      checkIn,
+      checkOut,
+      guests: guestCount,
+      totalNights,
+      totalPrice: product.price * totalNights,
+    });
+  }}> <button className="w-full bg-[#004274] hover:bg-[#00335c] text-white font-bold py-3 rounded-md uppercase tracking-widest text-xs duration-300">
               Book Now
             </button>
-
+</Link>
           </div>
 
         </div>
@@ -561,7 +600,7 @@ const [showPriceList, setShowPriceList] = useState(false);
           {/* Content */}
           <div className="p-6">
 
-            <Link to={`/roomsdetails/${room.id}`} className="hover:text-[#0f2d4a] transition-colors duration-300">
+            <Link to={`/roomsdetails/${room.id}`} onClick={() => setSelectedRoom(room)} className="hover:text-[#0f2d4a] transition-colors duration-300">
               <h2 className="text-[26px] leading-tight font-bold text-[#2b2b2b] min-h-[64px]">
                 {room.title}
                 <br />
@@ -605,10 +644,22 @@ const [showPriceList, setShowPriceList] = useState(false);
             </div>
 
             {/* Button */}
-            <button className="mt-6 w-full border border-[#c7a57a] py-4 uppercase tracking-[3px] text-[12px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 rounded-sm">
+           <Link to="/booking" onClick={() => {
+    setSelectedRoom(room);
+
+    setBookingData({
+      room,
+      checkIn,
+      checkOut,
+      guests,
+      totalNights,
+      totalPrice:
+        room.price * totalNights,
+    });
+  }} > <button className="mt-6 w-full border border-[#c7a57a] py-4 uppercase tracking-[3px] text-[12px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300 rounded-sm">
               Book Now
             </button>
-
+</Link>
             {/* Bottom Icons */}
             <div className="flex justify-between items-center mt-8 border-t pt-5">
               <div className="flex gap-4 text-gray-500">
@@ -630,7 +681,7 @@ const [showPriceList, setShowPriceList] = useState(false);
                 ))}
               </div>
               
-              <Link to={`/roomsdetails/${room.id}`} className="uppercase tracking-[2px] text-[11px] text-[#c7a57a] hover:underline">
+              <Link to={`/roomsdetails/${room.id}`} onClick={() => setSelectedRoom(room)} className="uppercase tracking-[2px] text-[11px] text-[#c7a57a] hover:underline">
                 Full Info →
               </Link>
             </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import { ALL_ROOMS } from "/src/Data/Data1";
-
+import {useRoomStore} from "/src/Data/store.js";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   BedDouble,
@@ -14,14 +14,37 @@ import { Link } from "react-router-dom";
 
 
 export default function ResortSearchSystem() {
-  const [checkIn, setCheckIn] = useState(new Date());
 
-  const [checkOut, setCheckOut] = useState(
-    // eslint-disable-next-line react-hooks/purity
-    new Date(Date.now() + 86400000)
+  const {
+  setSelectedRoom,
+  setBookingData,
+  bookingData,
+} = useRoomStore();
+  const [checkIn, setCheckIn] =
+  useState(
+    bookingData?.checkIn
+      ? new Date(
+          bookingData.checkIn
+        )
+      : new Date()
   );
 
-  const [guests, setGuests] = useState(1);
+  const [checkOut, setCheckOut] =
+  useState(
+    bookingData?.checkOut
+      ? new Date(
+          bookingData.checkOut
+        )
+      : new Date(
+          // eslint-disable-next-line react-hooks/purity
+          Date.now() + 86400000
+        )
+  );
+
+ const [guests, setGuests] =
+  useState(
+    bookingData?.guests || 1
+  );
 
   const [maxPrice, setMaxPrice] = useState(30000);
 
@@ -126,8 +149,9 @@ const toggleSizeDropdown3 = () => {
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
   setFilteredRooms(filtered);
-
+ 
   setCurrentPage(1);
+  
 
 }, [
   guests,
@@ -136,6 +160,23 @@ const toggleSizeDropdown3 = () => {
   selectedServices,
   sortType,
 ]);
+useEffect(() => {
+  setBookingData({
+    checkIn,
+    checkOut,
+    guests,
+    totalNights,
+  });
+}, [
+  checkIn,
+  checkOut,
+  guests,
+  totalNights,
+  setBookingData,
+]);
+
+
+
   const handleServiceChange = (service) => {
     setSelectedServices((prev) =>
       prev.includes(service)
@@ -444,7 +485,7 @@ const toggleSizeDropdown3 = () => {
       {/* Content */}
       <div className="p-6">
 
-       <Link to={`/roomsdetails/${room.id}`}>
+       <Link to={`/roomsdetails/${room.id}`} onClick={() => setSelectedRoom(room)}>
          <h2 className="text-[30px] leading-tight font-bold text-[#2b2b2b]">
            {room.title}
            <br />
@@ -489,9 +530,23 @@ const toggleSizeDropdown3 = () => {
         </div>
 
         {/* Button */}
-        <button className="mt-6 w-full border border-[#c7a57a] py-4 uppercase tracking-[3px] text-[12px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300">
+        <Link  to="/booking"
+  onClick={() => {
+    setSelectedRoom(room);
+
+    setBookingData({
+      room,
+      checkIn,
+      checkOut,
+      guests,
+      totalNights,
+      totalPrice:
+        room.price * totalNights,
+    });
+  }}><button className="mt-6 w-full border border-[#c7a57a] py-4 uppercase tracking-[3px] text-[12px] text-[#c7a57a] hover:bg-[#c7a57a] hover:text-white duration-300">
           Book Now
         </button>
+        </Link>
 
         {/* Bottom Icons */}
        <div className="flex justify-between items-center mt-8 border-t pt-5">
@@ -538,9 +593,11 @@ const toggleSizeDropdown3 = () => {
 
   ))}
 </div>
-  <button className="uppercase tracking-[2px] text-[11px] text-[#c7a57a]">
-    Full Info →
-  </button>
+ <Link to={`/roomsdetails/${room.id}`} onClick={() => setSelectedRoom(room)}>
+    <button  className="uppercase tracking-[2px] cursor-pointer text-[11px] text-[#c7a57a]">
+      Full Info →
+    </button>
+  </Link>
 
 </div>
       </div>
