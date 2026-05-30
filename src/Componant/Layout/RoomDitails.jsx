@@ -36,8 +36,6 @@ const settings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
-  pauseOnHover: false,
-  accessibility: false,
   responsive: [
     {
       breakpoint: 1024,
@@ -47,11 +45,12 @@ const settings = {
       }
     },
     {
-      breakpoint: 768, // এখানে ৬৪০ এর বদলে ৭৬৮ দিলে ভালো হয়
+      breakpoint: 768, // ট্যাব এবং মোবাইলের জন্য
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        centerMode: false, // সেন্টার মোড ফলস করে দিন যাতে কার্ড চ্যাপ্টা না হয়
+        centerMode: false,
+        arrows: false // মোবাইলে অ্যারো অফ রাখলে ডিজাইন ক্লিন থাকে
       }
     }
   ]
