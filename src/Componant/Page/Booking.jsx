@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {useRoomStore} from '/src/Data/store.js';
-
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Booking = () => {
 const [arrivalTime, setArrivalTime] = useState("");
 const [errors, setErrors] = useState({});
+const navigate = useNavigate();
 const [formData, setFormData] = useState({
   name: "",
   surname: "",
@@ -28,49 +30,76 @@ if (!bookingData) {
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
 
   const newErrors = {};
-if (!formData.name.trim())
-  newErrors.name = "Name is required";
 
-if (!formData.surname.trim())
-  newErrors.surname = "Surname is required";
+  if (!formData.name.trim())
+    newErrors.name = "Name is required";
 
   if (!formData.surname.trim())
-    newErrors.surname = "Email is required";
+    newErrors.surname = "Surname is required";
 
   if (!formData.email.trim())
-    newErrors.email = "Telephone is required";
+    newErrors.email = "Email is required";
 
   if (!formData.telephone.trim())
-    newErrors.telephone = "Address is required";
+    newErrors.telephone = "Telephone is required";
 
   if (!formData.address.trim())
-    newErrors.address = "City is required";
+    newErrors.address = "Address is required";
 
   if (!formData.city.trim())
-    newErrors.city = "Country is required";
+    newErrors.city = "City is required";
 
   if (!formData.country.trim())
-    newErrors.country = "Country code is required";
+    newErrors.country = "Country is required";
+
   if (!formData.zipCode.trim())
-    newErrors.zipCode = "ZIP code is required";
+    newErrors.zipCode = "ZIP Code is required";
 
   setErrors(newErrors);
 
   if (Object.keys(newErrors).length > 0) {
-    setTimeout(() => {
-      setErrors({});
-    }, 3000);
-
     return;
   }
 
-  console.log("Form Submitted");
-  console.log(formData.name);
-console.log(newErrors);
+  const bookingInfo = {
+   roomName: room.title,
+  roomImage: room.image,
+
+  name: formData.name,
+  surname: formData.surname,
+  email: formData.email,
+  telephone: formData.telephone,
+  country: formData.country,
+  city: formData.city,
+  address: formData.address,
+  zipCode: formData.zipCode,
+
+  guests,
+  totalNights,
+  totalPrice,
+  checkIn,
+  checkOut,
+  arrivalTime,
+  };
+
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/bookings",
+      bookingInfo
+    );
+
+    if (res.data.insertedId) {
+      alert("Booking Successful");
+      navigate("/dashboard");
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Booking Failed");
+  }
 };
 const {
   room,

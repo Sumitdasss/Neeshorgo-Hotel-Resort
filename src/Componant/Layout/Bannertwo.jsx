@@ -1,5 +1,5 @@
 import Container from "/src/Componant/Common/Container"
-
+import { Link } from 'react-router-dom';
 const Bannertwo = () => {
   return (
 <section className="bg-[#f5f5f5] py-20">
@@ -64,10 +64,10 @@ const Bannertwo = () => {
             Free high speed wireless internet access
           </p>
 
-          <button className="bg-[#1d1f24] hover:bg-black text-white px-6 sm:px-8 py-4 sm:py-5 uppercase tracking-[3px] text-xs sm:text-sm font-semibold transition-all duration-300">
+         <Link  to="/rooms"> <button className="bg-[#1d1f24] hover:bg-black text-white px-6 sm:px-8 py-4 sm:py-5 uppercase tracking-[3px] text-xs sm:text-sm font-semibold transition-all duration-300">
             Book Now From 5000 TK
           </button>
-
+</Link>
         </div>
       </div>
 
@@ -122,9 +122,11 @@ const Bannertwo = () => {
 
     {/* Button */}
     <div className="flex justify-center mt-10 lg:mt-12">
+<Link  to="/rooms">
       <button className="bg-[#c69c6d] hover:bg-[#b88a57] text-white px-8 sm:px-12 py-4 sm:py-5 uppercase tracking-[4px] text-xs sm:text-sm transition-all duration-300">
         View More
       </button>
+      </Link>
     </div>
 
   </Container>

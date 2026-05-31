@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 
 const Bannerthreee = () => {
   return (
@@ -52,10 +52,11 @@ const Bannerthreee = () => {
       </div>
 
       {/* Button */}
+      <Link  to="/rooms">
       <button className="bg-[#c69c6d] hover:bg-[#b88a57] text-white px-8 sm:px-10 py-4 sm:py-5 uppercase tracking-[3px] text-xs sm:text-sm font-semibold transition-all duration-300">
         Check All Packages
       </button>
-
+</Link>
     </div>
 
   </div>

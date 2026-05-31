@@ -570,6 +570,110 @@ Nothing beats the smells wafting from a well-run kitchen – a pinch of rosemary
 
 
 
+
+<div 
+      className="w-full h-[900px] md:h-[600px] lg:h-[600px] mb-20 bg-cover bg-center bg-no-repeat relative flex items-center justify-center py-16 px-4"
+      style={{ 
+     
+        backgroundImage: "url('https://images.pexels.com/photos/11788437/pexels-photo-11788437.jpeg')" 
+      }}
+    >
+      {/* ব্যাকগ্রাউন্ড কিছুটা ডার্ক করার জন্য ওভারলে */}
+      <div className="absolute inset-0 bg-black/20"></div>
+
+      {/* মেইন সাদা বক্সটি */}
+      <div className="relative z-10 bg-white w-full max-w-4xl p-8 md:p-12 shadow-lg grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+        
+        {/* বাম পাস: কন্টাক্ট ইনফরমেশন */}
+        <div>
+          {/* Contact Us ব্যাজ */}
+          <span className="inline-block bg-black text-white text-[10px] uppercase tracking-widest px-3 py-1 font-medium mb-3">
+            Contact Us
+          </span>
+          
+          <h2 className="text-2xl font-normal text-gray-800 mb-8 tracking-wide">
+            Leave your Feedback
+          </h2>
+
+          {/* ইনফো লিস্ট */}
+          <div className="space-y-4 text-xs text-gray-500">
+            {/* Address */}
+            <div className="flex justify-between items-start border-b border-gray-100 pb-2">
+              <span className="font-medium text-gray-700">Address :</span>
+              <span className="text-right max-w-[180px] leading-relaxed">
+                Plot No. 492, Marine Drive Road
+              </span>
+            </div>
+
+            {/* City */}
+            <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+              <span className="font-medium text-gray-700">City :</span>
+              <span>Cox's Bazar</span>
+            </div>
+
+            {/* Email */}
+            <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+              <span className="font-medium text-gray-700">Email :</span>
+              <a href="mailto:neeshorgocox@gmail.com" className="hover:underline">neeshorgocox@gmail.com</a>
+            </div>
+
+            {/* Check-In */}
+            <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+              <span className="font-medium text-gray-700">Check-In :</span>
+              <span>01:00 pm</span>
+            </div>
+
+            {/* Check-Out */}
+            <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+              <span className="font-medium text-gray-700">Check-Out :</span>
+              <span>11:00 am</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ডান পাশ: ফিডব্যাক ফর্ম */}
+        <form className="flex flex-col space-y-4 text-xs">
+          {/* Name Input */}
+          <div className="flex flex-col space-y-1">
+            <label className="text-gray-600 font-medium">Name :</label>
+            <input 
+              type="text" 
+              className="w-full bg-gray-50 border border-gray-200 p-2 focus:outline-none focus:border-gray-400"
+            />
+          </div>
+
+          {/* Email Input */}
+          <div className="flex flex-col space-y-1">
+            <label className="text-gray-600 font-medium">Email :</label>
+            <input 
+              type="email" 
+              className="w-full bg-gray-50 border border-gray-200 p-2 focus:outline-none focus:border-gray-400"
+            />
+          </div>
+
+          {/* Message Input */}
+          <div className="flex flex-col space-y-1">
+            <label className="text-gray-600 font-medium">Message :</label>
+            <textarea 
+              rows="5" 
+              className="w-full bg-gray-50 border border-gray-200 p-2 resize-none focus:outline-none focus:border-gray-400"
+            ></textarea>
+          </div>
+
+          {/* সাবমিট বাটন (ডিজাইনে বাটন স্পষ্ট না থাকলেও ফর্মের সুবিধার্থে যোগ করা হয়েছে) */}
+          <button 
+            type="submit" 
+            className="bg-black text-white py-2.5 px-4 font-medium uppercase tracking-wider hover:bg-gray-800 transition-colors self-start mt-2"
+          >
+            Submit
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+
+
 </div>
   )
 }

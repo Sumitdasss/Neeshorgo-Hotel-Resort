@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import img11 from "/src/assets/unnamed.jpg";
 import Slider from "react-slick";
 import  Button  from "/src/Componant/Common/Button";
+import { Link } from 'react-router-dom';
 const SlickSlider=Slider.default?Slider.default:Slider;
 const Sliderx = () => {
  var settings = {
@@ -47,9 +48,10 @@ const Sliderx = () => {
     </h1>
 
     {/* Button */}
-    <Button Text="Book Now" className="border-2 border-white px-8 py-3 rounded-full text-lg hover:bg-white hover:text-black duration-300">
-    
+   <Link  to="/rooms"> <Button Text="Book Now" className="border-2 border-white px-8 py-3 rounded-full text-lg hover:bg-white hover:text-black duration-300">
+
     </Button>
+    </Link>
   </div>
 
   {/* Left Arrow */}
@@ -81,9 +83,10 @@ const Sliderx = () => {
     </h1>
 
     {/* Button */}
-    <Button Text="Read more" className="border-2 border-white px-8 py-3 rounded-full text-lg hover:bg-white hover:text-black duration-300">
+   <Link to="/restaurants"> <Button Text="Read more" className="border-2 border-white px-8 py-3 rounded-full text-lg hover:bg-white hover:text-black duration-300">
     
     </Button>
+    </Link>
   </div>
 
   {/* Left Arrow */}
@@ -115,9 +118,13 @@ const Sliderx = () => {
     </h1>
 
     {/* Button */}
-    <Button Text="View Rooms" className="border-2 border-white px-8 py-3 rounded-full text-lg hover:bg-white hover:text-black duration-300">
+   
+   
+   <Link  to="/rooms"> <Button Text="View Rooms" className="border-2 border-white px-8 py-3 rounded-full text-lg hover:bg-white hover:text-black duration-300">
     
     </Button>
+
+    </Link>
   </div>
 
   {/* Left Arrow */}

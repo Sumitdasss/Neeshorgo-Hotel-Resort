@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom'
 import Container from "/src/Componant/Common/Container"
 const Bannerfour = () => {
   return (
@@ -30,10 +30,10 @@ const Bannerfour = () => {
           Indian to Chinese, Thai to quintessentially Bengali and Continental.
         </p>
 
-        <button className="border border-[#c69c6d] text-[#c69c6d] hover:bg-[#c69c6d] hover:text-white duration-300 uppercase tracking-[3px] text-sm px-10 py-5 w-fit mx-auto lg:mx-0">
+       <Link  to="/restaurants"> <button className="border border-[#c69c6d] text-[#c69c6d] hover:bg-[#c69c6d] hover:text-white duration-300 uppercase tracking-[3px] text-sm px-10 py-5 w-fit mx-auto lg:mx-0">
           Read More
         </button>
-
+</Link>
       </div>
 
       {/* Top Right Image */}
@@ -76,9 +76,11 @@ const Bannerfour = () => {
           and meat BBQ prepared to satisfy your taste palates.
         </p>
 
-        <button className="border border-[#c69c6d] text-[#c69c6d] hover:bg-[#c69c6d] hover:text-white duration-300 uppercase tracking-[3px] text-sm px-10 py-5 w-fit mx-auto lg:mx-0">
-          Read More
-        </button>
+        <Link  to="/restaurants">
+          <button className="border border-[#c69c6d] text-[#c69c6d] hover:bg-[#c69c6d] hover:text-white duration-300 uppercase tracking-[3px] text-sm px-10 py-5 w-fit mx-auto lg:mx-0">
+            Read More
+          </button>
+        </Link>
 
       </div>
 

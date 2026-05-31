@@ -72,17 +72,20 @@ const NavBAr = () => {
                 </div>
               </li>
 
-              <li className="hover:text-[#5eead4] text-[18px] duration-300 cursor-pointer">About</li>
-              <li className="hover:text-[#5eead4] text-[18px] duration-300 cursor-pointer">Contact</li>
-              <li className="hover:text-[#5eead4] text-[18px] duration-300 cursor-pointer">Login</li>
+              <Link to="/about"><li className="hover:text-[#5eead4] text-[18px] duration-300 cursor-pointer">About</li></Link>
+              <Link to="/contact"><li className="hover:text-[#5eead4] text-[18px] duration-300 cursor-pointer">Contact</li></Link>
+              <Link to="/login"><li className="hover:text-[#5eead4] text-[18px] duration-300 cursor-pointer">Login</li></Link>
+              <Link to="/dashboard"><li className="hover:text-[#5eead4] text-[18px] duration-300 cursor-pointer">Dashboard</li></Link>
             </ul>
 
             {/* Desktop Button */}
             <div className="hidden md:block">
-              <Button
-                Text="BOOK NOW"
-                className="bg-[#99f6e4] text-[#022c22] font-semibold px-5 py-2 rounded-lg hover:bg-[#5eead4] duration-300 shadow-lg"
-              />
+             <Link to="/rooms"> 
+                <Button
+                  Text="BOOK NOW"
+                  className="bg-[#99f6e4] text-[#022c22] font-semibold px-5 py-2 rounded-lg hover:bg-[#5eead4] duration-300 shadow-lg"
+                />
+              </Link>
             </div>
 
             {/* Hamburger Icon */}
@@ -116,18 +119,21 @@ const NavBAr = () => {
            <Link to="/juice"> <li className="hover:text-[#5eead4] text-[15px] pl-4 duration-300 cursor-pointer text-white/80">Juice Bar</li></Link>
            <Link to="/restaurants"> <li className="hover:text-[#5eead4] text-[15px] pl-4 duration-300 cursor-pointer text-white/80">Restaurant</li></Link>
            <Link to="/facilities"> <li className="hover:text-[#5eead4] text-[15px] pl-4 duration-300 cursor-pointer text-white/80">Facilities</li></Link>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/about">About</Link></li>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/contact">Contact</Link></li>
-            <li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer"><Link to="/login">Login</Link></li>
+            <Link to="/about"><li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">About</li></Link>
+            <Link to="/contact"><li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">Contact</li></Link>
+            <Link to="/login"><li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">Login</li></Link>
+            <Link to="/dashboard"><li className="hover:text-[#5eead4] text-[20px] duration-300 cursor-pointer">Dashboard</li></Link>  
           </ul>
         </div>
 
         {/* Mobile Button */}
         <div className="flex justify-center px-6">
-          <Button
-            Text="BOOK NOW"
-            className="bg-[#99f6e4] text-[#022c22] font-semibold px-6 py-3 rounded-lg hover:bg-[#5eead4] duration-300 shadow-lg w-full text-center"
-          />
+          <Link to="/rooms">
+            <Button
+              Text="BOOK NOW"
+              className="bg-[#99f6e4] text-[#022c22] font-semibold px-6 py-3 rounded-lg hover:bg-[#5eead4] duration-300 shadow-lg w-full text-center"
+            />
+          </Link>
         </div>
       </div>
 
