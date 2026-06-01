@@ -1,15 +1,88 @@
 import { ReactTyped } from "react-typed";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// GSAP-এর ScrollTrigger প্লাগইন রেজিস্টার করা হলো
+gsap.registerPlugin(ScrollTrigger);
 
 const JuiceBar = () => {
+  // অ্যানিমেশনের জন্য রেফারেন্স তৈরি
+  const row1Ref = useRef(null);
+  const row2Ref = useRef(null);
+
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
+    // --- ROW 1 ANIMATION ---
+    const row1Image = row1Ref.current.querySelector(".row1-img");
+    const row1Content = row1Ref.current.querySelector(".row1-content");
+
+    // ইমেজ বাম দিক থেকে আসবে (AOS fade-right এর বিকল্প)
+    gsap.fromTo(row1Image,
+      { opacity: 0, x: -60 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: row1Ref.current,
+          start: "top 80%", // স্ক্রিনের ৮০% এ সেকশনটি আসলে অ্যানিমেশন শুরু হবে
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+    // টেক্সট ডান দিক থেকে আসবে (AOS fade-left এর বিকল্প)
+    gsap.fromTo(row1Content,
+      { opacity: 0, x: 60 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: row1Ref.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+
+    // --- ROW 2 ANIMATION ---
+    const row2Content = row2Ref.current.querySelector(".row2-content");
+    const row2Image = row2Ref.current.querySelector(".row2-img");
+
+    // টেক্সট বাম দিক থেকে আসবে (AOS fade-right এর বিকল্প)
+    gsap.fromTo(row2Content,
+      { opacity: 0, x: -60 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: row2Ref.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+    // ইমেজ ডান দিক থেকে আসবে (AOS fade-left এর বিকল্প)
+    gsap.fromTo(row2Image,
+      { opacity: 0, x: 60 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: row2Ref.current,
+          start: "top 80%",
+        }
+      }
+    );
   }, []);
+
   return (
     <div>
       {/* HERO SECTION */}
@@ -30,18 +103,19 @@ const JuiceBar = () => {
 
         <div
           className="
-        absolute bottom-0 left-0 w-full h-10 sm:h-14 lg:h-16
-        bg-white
-        [clip-path:polygon(0_100%,50%_0,100%_100%)]
-      "
+          absolute bottom-0 left-0 w-full h-10 sm:h-14 lg:h-16
+          bg-white
+          [clip-path:polygon(0_100%,50%_0,100%_100%)]
+        "
         />
       </div>
 
       {/* CONTENT SECTION */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 py-12 sm:py-16 lg:py-24 space-y-16 sm:space-y-24 lg:space-y-32">
+        
         {/* ROW 1 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          <div data-aos="fade-right" className="overflow-hidden">
+        <div ref={row1Ref} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="row1-img overflow-hidden">
             <img
               src="https://neeshorgo.com.bd/wp-content/uploads/2023/07/IMG-20230725-WA0030.jpg"
               alt=""
@@ -49,9 +123,9 @@ const JuiceBar = () => {
             />
           </div>
 
-          <div data-aos="fade-left">
+          <div className="row1-content">
             <ReactTyped
-              className="text-[#262626]  font-medium tracking-[2px] mb-4 sm:mb-6 text-3xl sm:text-base"
+              className="text-[#262626] font-medium tracking-[2px] mb-4 sm:mb-6 text-3xl sm:text-base block"
               strings={[" Our Juice Bar ", "Infinity Pool", "Ocean View"]}
               typeSpeed={50}
               backSpeed={30}
@@ -85,8 +159,8 @@ const JuiceBar = () => {
         </div>
 
         {/* ROW 2 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          <div data-aos="fade-right">
+        <div ref={row2Ref} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="row2-content">
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
               Have your smoothie while swimming!
             </h3>
@@ -110,7 +184,7 @@ const JuiceBar = () => {
             </p>
           </div>
 
-          <div data-aos="fade-left" className="overflow-hidden">
+          <div className="row2-img overflow-hidden">
             <img
               src="https://neeshorgo.com.bd/wp-content/uploads/2023/07/WhatsApp-Image-2023-07-25-at-15.34.05.jpeg"
               alt=""
